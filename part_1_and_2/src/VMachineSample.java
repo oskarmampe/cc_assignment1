@@ -53,7 +53,7 @@ public class VMachineSample{
     {
         VMachineSample sample = new VMachineSample();
         try {
-            //sample.part1();
+            sample.part1();
             sample.part2();
         } catch (Exception e)
         {
@@ -255,39 +255,18 @@ public class VMachineSample{
                 "This is the information OpenNebula stores for the VM:");
         System.out.println(rc.getMessage() + "\n");
 
-        // This VirtualMachine object has some helpers, so we can access its
-        // attributes easily (remember to load the data first using the info
-        // method).
         System.out.println("The new VM " +
                 vm.getName() + " has status: " + vm.status());
     }
 
     private void connectToClient() throws Exception {
-        // First of all, a Client object has to be created.
+
         String passwd;
 
         String username = System.getProperty("user.name");
         passwd = new String(System.console().readPassword("[%s]", "Password:"));
 
-        // First of all, a Client object has to be created.
-        // Here the client will try to connect to OpenNebula using the default
-
         oneClient = new Client(username + ":" + passwd, "https://csgate1.leeds.ac.uk:2633/RPC2");
-    }
-
-    private void cancelVM() {
-
-        // We have also some useful helpers for the actions you can perform
-        // on a virtual machine, like cancel:
-        rc = vm.cancel();
-        System.out.println("\nTrying to cancel the VM " + vm.getId() +
-                " (should fail)...");
-
-        // This is all the information you can get from the OneResponse:
-        System.out.println("\tOpenNebula response");
-        System.out.println("\t Error: " + rc.isError());
-        System.out.println("\t Msg: " + rc.getMessage());
-        System.out.println("\t ErrMsg: " + rc.getErrorMessage());
     }
 
     private void deleteVM() {
@@ -314,13 +293,14 @@ public class VMachineSample{
     }
 
     private void getHostInfo(){
+        //                  CPU  MEM  DISK
+        double[] weights = {0.5, 0.4, 0.1};
+
+        double cpuUsage, memUsage, diskUsage;
+        int hostId;
+
 		HostPool pool = new HostPool( oneClient );
 		pool.info();
-		//                  CPU  MEM  DISK
-		double[] weights = {0.5, 0.4, 0.1};
-
-		double cpuUsage, memUsage, diskUsage;
-		int hostId;
 
         System.out.println("Physical Hosts with resource usage:");
         System.out.println("-----------------------------------------------------------------");
