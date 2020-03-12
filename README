@@ -1,0 +1,18 @@
+### Cloud Computing - Coursework 1
+
+The file structure:
+
+.
+├── images
+├── part_1_and_2
+└── part_3
+    ├── hadoop_code
+    │   └── org
+    │       └── myorg
+    ├── hadoop_config_files
+    │   └── shellprofile.d
+    └── hadoop_results
+
+part_1_and_2 contains a single VMachineSample.java, which is the code required to run part 1 and part 2. To run the code, compile using javac in csgate1, and then run normally using java, assuming all class paths are set for OpenNebula API to work.
+
+part_3 contains configuration files for Hadoop, which I used to work with my 4 machines. These can be copied to $HADOOP_HOME/etc/hadoop for all machines, and change IP addresses in 'workers' file. As for MapReduce code, it is in hadoop_code, along with the already compiled jar, which was used for my Hadoop jobs. The result for Hadoop jobs, time and CPU wise are stored in hadoop_results. Lastly, the .sh files, as well as the bashrc file, used for experiments are stored in the root part_3.
